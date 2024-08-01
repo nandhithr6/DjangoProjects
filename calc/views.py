@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from calc.models import Customer, Product
+
 # Create your views here.
 def home(request): 
     return render(request, 'home.html', {'name':'Raju'})
@@ -13,7 +15,9 @@ def add(request):
 
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    customers=Customer.objects.all()
+    return render(request, 'dashboard.html', {'customers': customers})
 
 def products(request):
-    return render(request,'products.html' )
+    products=Product.objects.all()
+    return render(request,'product.html', {'products': products})
