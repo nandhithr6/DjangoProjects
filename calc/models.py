@@ -24,3 +24,18 @@ class Product(models.Model):
     tags=models.ManyToManyField(Tag)
     
     def __str__(self): return self.name
+
+class Order(models.Model):
+    STATUS=(
+    ('Pending','Pending'),
+    ('Out of Delivery','Out of Delivery'),
+    ('Delivered','Delivered')
+    )
+    customer=models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
+    product=models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    status=models.CharField(max_length=300, choices=STATUS)
+
+class OrderAdmin(models.Model):
+    list_display = ('id', 'customer', 'product', 'status')  # Columns to display
+    list_filter = ('status',)  # Filters on the side
+    search_fields = ('customer__name', 'product__name')  # Search fields
