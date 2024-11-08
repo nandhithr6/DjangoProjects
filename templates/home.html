@@ -1,14 +1,18 @@
-{% extends 'base.html' %}
-{% block content %}
-
-<h1> Helo {{name}} </h1>
-
-<form action="add" method="post">
-    {% csrf_token %}
-    Enter First Number: <input type="text" name="num1"><br>
-    Enter Second Number: <input type="text" name="num2"><br>
-
-    <input type="submit">
+<table class="table">
+ <tr>
+ <th>Name</th>
+ <th>Age</th>
+</tr>
+ {% for customer in customers %}
+ <tr>
+ <td>{{customer.name}}</td>
+ <td>{{customer.age}}</td>
+</tr>
+ {% endfor %}
+</table>
+<form action="insertData" method="post">
+ {% csrf_token %}
+ name: <input type="text" name="nameVar"><br>
+ age: <input type="text" name="ageVar"><br>
+ <input type="submit">
 </form>
-
-{% endblock %}
